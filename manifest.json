@@ -1,0 +1,17 @@
+{
+  "name": "BANG PWA",
+  "short_name": "PWA Demo",
+  "description": "The app that helps you understand PWA",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/icon1.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    }
+
+  ],
+  "theme_color": "blue",
+  "background_color": "yellow",
+  "display": "standalone"
+}
