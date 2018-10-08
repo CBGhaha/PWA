@@ -5,7 +5,6 @@
      <meta name="viewport" content="width=device-width, user-scalable=no" />
      <link rel="manifest" href="/manifest.json" />
      <link rel="stylesheet" type="text/css" href="main.css">
-     <link rel="apple-touch-icon" href="icon2.png" />
     <title>WPA</title>
   </head>
   <body>
@@ -22,17 +21,20 @@
               // Push isn't supported on this browser, disable or hide UI.
               return;
           }
-
+          //弹出选择框 用户选择是否允许网页弹出消息通知
           let promiseChain = new Promise((resolve, reject) => {
+              //弹出选择框
+              //Notification.requestPermission的第一种情况 --接受一个callback
               const permissionPromise = Notification.requestPermission(result => {
                   resolve(result);
               });
-
+              //Notification.requestPermission的第二种情况 --本身是一个promise
               if (permissionPromise) {
                   permissionPromise.then(resolve);
               }
           })
           .then(result => {
+            //如果用户选择允许消息通知 就执行 Service Worker
               if (result === 'granted') {
                   execute();
               }
@@ -55,7 +57,10 @@
       }
       function execute() {
           registerServiceWorker().then(registration => {
-              registration.showNotification('Hello World!');
+              registration.showNotification('标题',{
+                body:'内容',
+                icon:'/icon1.png'
+              });
           });
       }
     </script>

@@ -15,11 +15,6 @@ self.addEventListener('install',e =>{
   )
 })
 
-
-
-
-
-
 //自定义页面请求响应 监听fetch事件
 this.addEventListener('fetch', function (event) {
     event.respondWith(
@@ -54,29 +49,10 @@ this.addEventListener('fetch', function (event) {
 });
 
 
-// //serviceWorker更新 在修改了业务代码后让缓存更新 serviceWorker新版本时 旧版本仍然在运行
-// // 当前版本处于waiting状态  所以在install serviceWorker时 将当前版本skipWaiting（） 至activate激活
-// self.addEventListener('activate', function (event) {
-//     event.waitUntil(
-//         Promise.all([
-//
-//             // 更新客户端
-//             self.clients.claim(),
-//
-//             // 清理旧版本
-//             caches.keys().then(function (cacheList) {
-//                 return Promise.all(
-//                     cacheList.map(function (cacheName) {
-//                         if (cacheName !==cacheStorageKey) {
-//                             return caches.delete(cacheName);
-//                         }
-//                     })
-//                 );
-//             })
-//         ])
-//     );
-// });
 
+
+//serviceWorker更新 在修改了业务代码后让缓存更新 serviceWorker新版本时 旧版本仍然在运行
+// 当前版本处于waiting状态  所以在install serviceWorker时 将当前版本skipWaiting（） 至activate激活
 self.addEventListener('activate',function(e){
   e.waitUntil(
     //获取所有cache名称
@@ -86,10 +62,12 @@ self.addEventListener('activate',function(e){
         cacheNames.filter(cacheNames => {
           return cacheNames !== cacheStorageKey
         }).map(cacheNames => {
+          // 清理旧版本
           return caches.delete(cacheNames)
         })
       )
     }).then(() => {
+      // 更新客户端
       return self.clients.claim()
     })
   )
