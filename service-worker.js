@@ -1,4 +1,4 @@
-var cacheStorageKey = 'minimal-pwa5'
+var cacheStorageKey = 'minimal-pwa1'
 var cacheList=[
   '/index.html',
   '/main.css',
@@ -59,11 +59,11 @@ self.addEventListener('activate',function(e){
     caches.keys().then(cacheNames => {
       return Promise.all(
         // 获取所有不同于当前版本名称cache下的内容
-        cacheNames.filter(cacheNames => {
-          return cacheNames !== cacheStorageKey
-        }).map(cacheNames => {
+        cacheNames.filter(cacheName => {
+          return cacheName !== cacheStorageKey
+        }).map(cacheName => {
           // 清理旧版本
-          return caches.delete(cacheNames)
+          return caches.delete(cacheName)
         })
       )
     }).then(() => {

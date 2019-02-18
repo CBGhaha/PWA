@@ -11,6 +11,13 @@
       WPAt
   </body>
   <script>
+    //pwa的核心思想
+    //1:页面注册service worker
+    //2:server worker的运行文件执行 根据server-worker.js的缓存版本号  创建服务 缓存名单中的资源
+    //3:server worker拦截页面的所有请求 对于命中缓存的资源 直接返回缓存资源 对于未在缓存中的资源从网络请求资源 并加入到缓存
+    //4:代码版本升级 修改server worker的版本号 创建新的缓存 并删除旧版本的server worker缓存  重新执行新的版本
+
+
       window.addEventListener('load', () => {
           if (!('serviceWorker' in navigator)) {
               // Service Worker isn't supported on this browser, disable or hide UI.

@@ -6,4 +6,4 @@ app.use(express.static('./'))
 app.use('/',function(req,res){
   res.end(html)
 })
-app.listen(80)
+app.listen(3333)
